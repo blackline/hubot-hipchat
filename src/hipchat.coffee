@@ -200,10 +200,10 @@ class HipChat extends Adapter
   userForMentionName: (name) ->
     result = null
     lowerName = name.toLowerCase()
-    for k of (@data.users or { })
-      userName = @data.users[k]['mention_name']
+    for k of (@robot.brain.data.users or { })
+      userName = @robot.brain.data.users[k]['name']
       if userName? and userName.toLowerCase() is lowerName
-        result = @data.users[k]
+        result = @robot.brain.data.users[k]
     result
 
   roomNameFromJid: (jid) ->
