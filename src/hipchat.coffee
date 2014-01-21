@@ -194,6 +194,18 @@ class HipChat extends Adapter
     catch e
       @logger.error "Bad user JID: #{jid}"
 
+  # Public: Get a User object given a mention name.
+  #
+  # Returns a User instance for the user with the specified mention name.
+  userForMentionName: (name) ->
+    result = null
+    lowerName = name.toLowerCase()
+    for k of (@data.users or { })
+      userName = @data.users[k]['mention_name']
+      if userName? and userName.toLowerCase() is lowerName
+        result = @data.users[k]
+    result
+
   roomNameFromJid: (jid) ->
     try
       jid.match(/^\d+_(.+)@conf\./)[1]
