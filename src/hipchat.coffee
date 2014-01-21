@@ -201,7 +201,7 @@ class HipChat extends Adapter
     result = null
     lowerName = name.toLowerCase()
     for k of (@robot.brain.data.users or { })
-      userName = @robot.brain.data.users[k]['name']
+      userName = @robot.brain.data.users[k]['mention_name']
       if userName? and userName.toLowerCase() is lowerName
         result = @robot.brain.data.users[k]
     result
