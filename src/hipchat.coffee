@@ -3,6 +3,7 @@ HTTPS = require "https"
 {inspect} = require "util"
 Connector = require "./connector"
 promise = require "./promises"
+_ = require "underscore"
 
 class HipChat extends Adapter
 
@@ -91,7 +92,7 @@ class HipChat extends Adapter
         for user in users
           user.id = @userIdFromJid user.jid
           @robot.brain.data.users[user.id] ||= {}
-          @robot.brain.data.users[user.id] = _.defaults(@robot.brain.data.users[user.id], user)
+          @robot.brain.data.users[user.id] = _.extend(@robot.brain.data.users[user.id], user)
 
       # Fetch user info
       connector.getRoster (err, users, stanza) =>
