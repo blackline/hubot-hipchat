@@ -211,6 +211,27 @@ class HipChat extends Adapter
     catch e
       @logger.error "Bad room JID: #{jid}"
 
+  htmlHeader: (pageTitle = "") ->
+    return "
+      <html>
+      <head>
+        <title>#{pageTitle}</title>
+        <link href=\"//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css\" rel=\"stylesheet\">
+        <link href=\"//netdna.bootstrapcdn.com/bootswatch/3.0.3/cerulean/bootstrap.min.css\" rel=\"stylesheet\">
+        <link href=\"//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css\" rel=\"stylesheet\">
+      </head>
+      <body>
+        <div class=\"col-xs-6 col-xs-offset-3\">
+    "
+
+  htmlFooter: () ->
+    return "
+        </div>
+        <script src=\"//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js\"></script>
+      </body>
+      </html>
+    "
+
   # Convenience HTTP Methods for posting on behalf of the token'd user
   get: (path, callback) ->
     @request "GET", path, null, callback
@@ -261,6 +282,7 @@ class HipChat extends Adapter
       @logger.error err
       @logger.error err.stack if err.stack
       callback err
+
 
 errmsg = (err) ->
   err + (if err.stack then '\n' + err.stack else '')
